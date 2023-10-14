@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.model.Lotto;
 import lotto.model.LottoService;
+import lotto.model.Prize;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,8 +27,14 @@ public class LottoController {
         for (int i = 0; i < lottoCnt; i++) {
             lottoList.add(lottoService.getLottoNumbers());
         }
-        int bonusNumber = inputView.readBonusNumber();
         outputView.printLottoCntAndList(lottoList);
+        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        int bonusNumber = inputView.readBonusNumber();
+        List<Prize> winningResults = lottoService.getWinningResults(winningNumbers, bonusNumber, lottoList);
+        List<Integer> winningCounts = lottoService.getWinningCounts(winningResults);
+        outputView.printWinningResults(winningCounts);
+        Double winningRate = lottoService.getWinningRate(winningCounts, lottoCnt);
+        outputView.printWinningRate(winningRate);
     }
 
 }
