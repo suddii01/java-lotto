@@ -1,7 +1,6 @@
 package lotto.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -16,5 +15,17 @@ public class Lotto {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public void printLottoNumbers() {
+        System.out.print("[");
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            System.out.print(numbers.get(i) + ", ");
+        }
+        System.out.println(numbers.get(numbers.size() - 1) + "]");
+    }
+
+    public void sortLottoNumbers() {
+        Collections.sort(numbers);
     }
 }

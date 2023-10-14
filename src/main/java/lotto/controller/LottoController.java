@@ -27,6 +27,7 @@ public class LottoController {
             lottoList.add(lottoService.getLottoNumbers());
         }
         int bonusNumber = inputView.readBonusNumber();
+        outputView.printLottoCntAndList(lottoList);
     }
 
 }
