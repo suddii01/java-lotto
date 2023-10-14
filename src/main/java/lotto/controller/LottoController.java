@@ -1,27 +1,31 @@
 package lotto.controller;
 
+import lotto.model.Lotto;
 import lotto.model.LottoService;
-import lotto.model.WinningLotto;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
-    private final WinningLotto winningLotto;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService, WinningLotto winningLotto) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoService = lottoService;
-        this.winningLotto = winningLotto;
     }
 
     public void runLottoGame() {
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        int purchasePrice = inputView.readPurchasePrice();
+        int lottoCnt = lottoService.getLottoCnt(purchasePrice);
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCnt; i++) {
+            lottoList.add(lottoService.getLottoNumbers());
+        }
         int bonusNumber = inputView.readBonusNumber();
     }
 

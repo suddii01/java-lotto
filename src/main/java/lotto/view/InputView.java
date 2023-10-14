@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 public class InputView {
+    public int readPurchasePrice() {
+        System.out.println("구입금액을 입력해 주세요.");
+        return Integer.parseInt(Console.readLine());
+    }
+
     public List<Integer> readWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
 
