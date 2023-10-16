@@ -25,8 +25,7 @@ public class LottoController {
         int lottoCnt = lottoService.calculateLottoCount(purchasePrice);
         List<Lotto> lottoList = generateLottoList(lottoCnt);
         outputView.printLottoCntAndList(lottoList);
-
-        List<Integer> winningNumbers = inputView.readWinningNumbers();
+        Lotto winningNumbers = inputView.readWinningNumbers();
         int bonusNumber = inputView.readBonusNumber();
 
         List<Prize> winningResults = lottoService.getWinningResults(winningNumbers, bonusNumber, lottoList);

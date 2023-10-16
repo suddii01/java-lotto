@@ -3,6 +3,8 @@ package lotto.model;
 import java.util.Collections;
 import java.util.List;
 
+import static lotto.exception.LottoExceptionType.*;
+
 public class Lotto {
     private final List<Integer> numbers;
 
@@ -12,9 +14,19 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
+        for (Integer number : numbers) {
+            if (number < 1 || number > 45) throw new IllegalArgumentException(INVALID_NUMBER_RANGE.getMessage());
         }
+        if (hasDuplicates(numbers)) {
+            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
+        }
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException(INVALID_NUMBER_COUNT.getMessage());
+        }
+    }
+
+    private boolean hasDuplicates(List<Integer> numbers) {
+        return numbers.size() != numbers.stream().distinct().count();
     }
 
     public void printLottoNumbers() {

@@ -1,10 +1,10 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.model.Lotto;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class InputView {
@@ -13,7 +13,7 @@ public class InputView {
         return Integer.parseInt(Console.readLine());
     }
 
-    public List<Integer> readWinningNumbers() {
+    public Lotto readWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
 
         Set<Integer> winningNumbers = new HashSet<>();
@@ -23,7 +23,8 @@ public class InputView {
         for (String inputNumber : inputNumbers) {
             winningNumbers.add(Integer.parseInt(inputNumber.trim()));
         }
-        return new ArrayList<>(winningNumbers);
+
+        return new Lotto(new ArrayList<>(winningNumbers));
     }
 
     public int readBonusNumber() {

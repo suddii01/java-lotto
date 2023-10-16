@@ -5,7 +5,8 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 
-import static lotto.model.Prize.*;
+import static lotto.model.Prize.NONE;
+import static lotto.model.Prize.valueOf;
 
 public class LottoService {
     public int calculateLottoCount(int purchasePrice) {
@@ -37,21 +38,21 @@ public class LottoService {
         return winningCounts;
     }
 
-    public List<Prize> getWinningResults(List<Integer> winningNumbers, int bonusNumber, List<Lotto> lottoList) {
+    public List<Prize> getWinningResults(Lotto winningLotto, int bonusNumber, List<Lotto> lottoList) {
         List<Prize> winningResults = new ArrayList<>();
         for (Lotto lotto : lottoList) {
-            Prize prize = getWinningResult(winningNumbers, bonusNumber, lotto);
+            Prize prize = getWinningResult(winningLotto, bonusNumber, lotto);
             if (prize == NONE) continue;
             winningResults.add(prize);
         }
         return winningResults;
     }
 
-    public Prize getWinningResult(List<Integer> winningNumbers, int bonusNumber, Lotto lotto) {
+    public Prize getWinningResult(Lotto winningLotto, int bonusNumber, Lotto lotto) {
         boolean hasBonus = false;
         int matchCount = 0;
         for (Integer number : lotto.getNumbers()) {
-            if (winningNumbers.contains(number)) matchCount++;
+            if (winningLotto.getNumbers().contains(number)) matchCount++;
             if (number.equals(bonusNumber)) hasBonus = true;
         }
         return valueOf(matchCount, hasBonus);
