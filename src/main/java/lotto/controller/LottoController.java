@@ -22,19 +22,26 @@ public class LottoController {
 
     public void runLottoGame() {
         int purchasePrice = inputView.readPurchasePrice();
-        int lottoCnt = lottoService.getLottoCnt(purchasePrice);
-        List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < lottoCnt; i++) {
-            lottoList.add(lottoService.getLottoNumbers());
-        }
+        int lottoCnt = lottoService.calculateLottoCount(purchasePrice);
+        List<Lotto> lottoList = generateLottoList(lottoCnt);
         outputView.printLottoCntAndList(lottoList);
+
         List<Integer> winningNumbers = inputView.readWinningNumbers();
         int bonusNumber = inputView.readBonusNumber();
+
         List<Prize> winningResults = lottoService.getWinningResults(winningNumbers, bonusNumber, lottoList);
         List<Integer> winningCounts = lottoService.getWinningCounts(winningResults);
         outputView.printWinningResults(winningCounts);
+
         Double winningRate = lottoService.getWinningRate(winningCounts, lottoCnt);
         outputView.printWinningRate(winningRate);
     }
 
+    private List<Lotto> generateLottoList(int lottoCnt) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < lottoCnt; i++) {
+            lottoList.add(lottoService.getLottoNumbers());
+        }
+        return lottoList;
+    }
 }

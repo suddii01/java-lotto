@@ -8,7 +8,7 @@ import java.util.List;
 import static lotto.model.Prize.*;
 
 public class LottoService {
-    public int getLottoCnt(int purchasePrice) {
+    public int calculateLottoCount(int purchasePrice) {
         return purchasePrice / 1000;
     }
 
