@@ -18,7 +18,7 @@ public class Lotto {
             if (number < 1 || number > 45) throw new IllegalArgumentException(INVALID_NUMBER_RANGE.getMessage());
         }
         if (hasDuplicates(numbers)) {
-            throw new IllegalArgumentException(DUPLICATED_NUMBER.getMessage());
+            throw new IllegalArgumentException(DUPLICATED_WINNING_NUMBER.getMessage());
         }
         if (numbers.size() != 6) {
             throw new IllegalArgumentException(INVALID_NUMBER_COUNT.getMessage());
